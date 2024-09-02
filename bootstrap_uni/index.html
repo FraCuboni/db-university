@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document_Name</title>
+
+    <!-- !!!   CSS   !!! -->
+
+    <!-- style.css -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Bootstrap css_framework -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <!-- !!!   JS   !!! -->
+
+    <!-- VUE js_framework -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- AXIOS API -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
+        integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+
+<body class="d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-4">
+                <h4>SELECT</h4>
+                <table class="table table-bordered text-center">
+                    <tbody>
+                        <tr>
+                            <td scope="col" style="width: 15%;">1</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT * FROM `students` WHERE YEAR(`date_of_birth`) = 1990;</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col" style="width: 15%;">2</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT *
+                                    FROM `courses`
+                                    WHERE `cfu` > 10</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col" style="width: 15%;">3</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT * FROM `students` WHERE TIMESTAMPDIFF(YEAR, `date_of_birth`, CURRENT_DATE) >=
+                                    30;</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col" style="width: 15%;">4</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT * FROM `courses` WHERE `year`= 1 AND `period` = 'I semestre';</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col" style="width: 15%;">5</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT * FROM `exams`
+                                    WHERE `date`= '2020-06-20'
+                                    AND HOUR(`hour`)>=14</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col" style="width: 15%;">6</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT * FROM `degrees` WHERE `level`= 'magistrale';</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col" style="width: 15%;">7</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT COUNT(*) AS `num_departments` FROM `departments`;</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col" style="width: 15%;">8</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT * FROM `teachers` WHERE `phone` IS NULL;</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4">
+                <h4>GROUP BY</h4>
+                <table class="table table-bordered text-center">
+                    <tbody>
+                        <tr>
+                            <td scope="col" style="width: 15%;">1</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT COUNT(*) AS `num_enroled_students`, YEAR(`enrolment_date`) AS `enrolment_date`
+                                    FROM `students`
+                                    GROUP BY `enrolment_date`</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col" style="width: 15%;">2</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT COUNT(*) AS `num_teachers`, `office_address` FROM `teachers` GROUP BY
+                                    `office_address`;</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col" style="width: 15%;">3</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT `exam_id`, AVG(`vote`) FROM `exam_student` GROUP BY `exam_id`;</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col" style="width: 15%;">4</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT `department_id`, COUNT(*) AS `num_courses` FROM `degrees` GROUP BY
+                                    `department_id`;</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4">
+                <h4>Titolo 3</h4>
+                <table class="table table-bordered text-center">
+                    <tbody>
+                        <tr>
+                            <td scope="col" style="width: 15%;">1</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT `degrees`.`name`, `students`.* from `degrees` JOIN `students` ON
+                                    `degrees`.`id` = `students`.`degree_id` WHERE `degrees`.`name` LIKE 'Corso di Laurea
+                                    in Economia';</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col" style="width: 15%;">2</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT `degrees`.*
+                                    FROM `degrees`
+                                    INNER JOIN `departments`
+                                    ON `departments`.`id` = `degrees`.`department_id`
+                                    WHERE `departments`.`id`= 7 AND `degrees`.`level` = 'magistrale'</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col" style="width: 15%;">3</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT `courses`.* FROM `courses` INNER JOIN `course_teacher` ON `courses`.`id`=
+                                    `course_teacher`.`course_id` INNER JOIN `teachers` ON `course_teacher`.`teacher_id`
+                                    = `teachers`.`id` WHERE `course_teacher`.`teacher_id` = 44;</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col" style="width: 15%;">4</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT * FROM `students` JOIN `degrees` ON `students`.`degree_id` = `degrees`.`id`
+                                    JOIN `departments` ON `degrees`.`department_id` = `departments`.`id` ORDER BY
+                                    `students`.`surname`, `students`.`name`;</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col" style="width: 15%;">5</td>
+                            <td scope="col" style="width: 85%;">
+                                <p></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col" style="width: 15%;">6</td>
+                            <td scope="col" style="width: 85%;">
+                                <p>SELECT DISTINCT `teachers`.* FROM `departments` JOIN `degrees` ON `departments`.`id`
+                                    = `degrees`.`department_id` JOIN `courses` ON `degrees`.`id` = `courses`.`degree_id`
+                                    JOIN `course_teacher` ON `courses`.`id` = `course_teacher`.`course_id` JOIN
+                                    `teachers` ON `course_teacher`.`teacher_id` = `teachers`.`id` WHERE
+                                    `departments`.`name` LIKE "Dipartimento di Matematica";</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col" style="width: 15%;">7</td>
+                            <td scope="col" style="width: 85%;">
+                                <p></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
